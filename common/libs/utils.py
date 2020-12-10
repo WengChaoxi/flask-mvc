@@ -4,24 +4,29 @@ from functools import wraps
 import json, platform, requests, rsa
 
 def handleData():
-    # data = request.get_data()  # 获取前端数据
-    # data = str(data, 'utf-8')  # 转utf-8
-    # data = json.loads(data)  # json转字典
-    data = json.loads(request.get_data().decode("utf-8"), strict=False)
-    # if data is None:
-    #     data = request.form.to_dic()
-    # elif data is None:
-    #     data = json.loads(request.args().decode("utf-8"), strict=False)
-    if data is None:
-        data ={}
-    return data
+    try:
+        # data = request.get_data()  # 获取前端数据
+        # data = str(data, 'utf-8')  # 转utf-8
+        # data = json.loads(data)  # json转字典
+        data = json.loads(request.get_data().decode("utf-8"), strict=False)
+        # if data is None:
+        #     data = request.form.to_dic()
+        # elif data is None:
+        #     data = json.loads(request.args().decode("utf-8"), strict=False)
+        if data is None:
+            data ={}
+        return data
+    except:
+        return {}
 
-def msg(status_code, data=None):
+def msg(status_code, data=None, msg=None):
     data_dic = {
         'code': status_code,
     }
     if data:
         data_dic['data'] = data
+    if msg:
+        data_dic['msg'] = msg
     # return jsonify(data_dic)
     return json.dumps(data_dic, ensure_ascii=False)
 
