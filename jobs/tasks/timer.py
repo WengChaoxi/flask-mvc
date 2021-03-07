@@ -1,8 +1,6 @@
 
-import requests
-
 def db_connecter():
-    print('[定时任务]：数据库活动')
+    print('[定时任务]：数据库活动 TODO')
 
 class SchedulerConfig(object):
     JOBS = [
