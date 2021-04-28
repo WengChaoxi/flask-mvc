@@ -53,6 +53,8 @@ def bytes2human(n):
 '''
 from math import log
 def bytes2human(n):
+    if n==0:
+        return '0.00B'
     symbols = ('B','K','M','G','T','P','E','Z','Y')
     index = int(log(n,2)//10)
     return '%.2f%s'%(float(n)/(1<<index*10), symbols[index])
