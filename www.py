@@ -3,11 +3,12 @@ from application import app
 from flask import request, session, redirect
 from common.libs.utils import docResponse
 
-# app.register_blueprint()
+from web.controllers.Example import route_example
+app.register_blueprint(route_example, url_prefix='/example')
 
 @app.route('/')
 def index():
-    return ''
+    return 'hello world'
 
 @app.route('/robots.txt')
 def robots():
@@ -20,7 +21,7 @@ def func():
     
 @app.before_request
 def visitLimit():
-    allow_url = ['/']
+    allow_url = ['/', '/example']
     if request.path in allow_url or session.get('account'):
         return None
     return redirect('/')
